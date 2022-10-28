@@ -3,25 +3,32 @@ import { Filter } from './FilterContact/FilterContact';
 import { ContactList } from './ContactList/ContactList';
 import { Title, SubTitle } from './AppStyle';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selector';
-import { addContactItem } from '../redux/contactsSlice';
+import { getContact, getFilter } from 'redux/selector';
+// import { addContactItem } from '../redux/contactsSlice';
 import { filterContacts } from 'redux/filterSlice';
+import { useEffect } from 'react';
+import { fetchContacts, addContact } from 'redux/Contacts/contactsOperation';
+// import { contactReducer } from 'redux/contactsSlice';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(getContact);
   const filter = useSelector(getFilter);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const isDublicate = ({ name }) => {
     const result = contacts.find(item => item.name === name);
     return result;
   };
 
-  const addContacts = data => {
+  const onAddContacts = data => {
     if (isDublicate(data)) {
       return alert(`${data.name} is already in contacts `);
     }
-    dispatch(addContactItem(data));
+    dispatch(addContact(data));
   };
 
   const filterChange = evt => {
@@ -45,7 +52,7 @@ export const App = () => {
   return (
     <>
       <Title>Phonebook</Title>
-      <ContactForm onAddContacs={addContacts} />
+      <ContactForm onAddContacs={onAddContacts} />
       {contacts.length !== 0 && (
         <>
           <SubTitle>Contacts</SubTitle>

@@ -1,7 +1,7 @@
 import { List, Item, Button } from './ContactListStyled';
 import { useDispatch } from 'react-redux';
-import { removeContacts } from 'redux/contactsSlice';
-import PropTypes from 'prop-types';
+import { removeContact } from 'redux/Contacts/contactsOperation';
+// import PropTypes from 'prop-types';
 
 export const ContactList = ({ items }) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ export const ContactList = ({ items }) => {
     return (
       <Item key={id}>
         {name}: {number}
-        <Button type="button" onClick={() => dispatch(removeContacts(id))}>
+        <Button type="button" onClick={() => dispatch(removeContact(id))}>
           Delete
         </Button>
       </Item>
@@ -20,12 +20,12 @@ export const ContactList = ({ items }) => {
   return <List>{itemList}</List>;
 };
 
-ContactList.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};
+// ContactList.propTypes = {
+//   items: PropTypes.arrayOf(
+//     PropTypes.exact({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ),
+// };
