@@ -20,6 +20,7 @@ const contactsSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
          },
+        
           [addContact.pending](state, action) {
              state.isLoading = true;
         },
@@ -33,12 +34,13 @@ const contactsSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
          },
+        
           [removeContact.pending](state, action) {
-             state.isLoading = true;
+            state.isLoading = true;
         },
          [removeContact.fulfilled](state, action) {
-             state.isLoading = false;
-            state.items = state.items.filter(item => item.id !== action.payload)
+            state.isLoading = false;
+             state.items = state.items.filter(item =>  item !== action.payload);
         },
         [removeContact.rejected](state, action) {
             state.isLoading = false;

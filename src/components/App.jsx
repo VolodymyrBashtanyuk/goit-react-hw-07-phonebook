@@ -4,11 +4,9 @@ import { ContactList } from './ContactList/ContactList';
 import { Title, SubTitle } from './AppStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContact, getFilter } from 'redux/selector';
-// import { addContactItem } from '../redux/contactsSlice';
 import { filterContacts } from 'redux/filterSlice';
 import { useEffect } from 'react';
 import { fetchContacts, addContact } from 'redux/Contacts/contactsOperation';
-// import { contactReducer } from 'redux/contactsSlice';
 
 export const App = () => {
   const dispatch = useDispatch();
