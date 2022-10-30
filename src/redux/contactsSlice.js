@@ -9,7 +9,7 @@ const contactsSlice = createSlice({
         error: null
     },
      extraReducers: {
-        [fetchContacts.pending](state, action) {
+        [fetchContacts.pending](state) {
              state.isLoading = true;
         },
          [fetchContacts.fulfilled](state, action) {
@@ -21,7 +21,7 @@ const contactsSlice = createSlice({
             state.error = action.payload;
          },
         
-          [addContact.pending](state, action) {
+          [addContact.pending](state) {
              state.isLoading = true;
         },
          [addContact.fulfilled](state, action) {
@@ -29,18 +29,20 @@ const contactsSlice = createSlice({
             state.items.push({
                 ...action.payload,
             })
+             
         },
         [addContact.rejected](state, action) {
             state.isLoading = false;
             state.error = action.payload;
          },
         
-          [removeContact.pending](state, action) {
+          [removeContact.pending](state) {
             state.isLoading = true;
         },
          [removeContact.fulfilled](state, action) {
+
             state.isLoading = false;
-             state.items = state.items.filter(item =>  item !== action.payload);
+            state.items = state.items.filter((item)=> item.id !== action.payload)
         },
         [removeContact.rejected](state, action) {
             state.isLoading = false;

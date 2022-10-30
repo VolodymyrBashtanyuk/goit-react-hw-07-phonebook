@@ -1,19 +1,12 @@
-import { List, Item, Button } from './ContactListStyled';
-import { useDispatch } from 'react-redux';
-import { removeContact } from 'redux/Contacts/contactsOperation';
-// import { useEffect } from 'react';
+import { List, Item, Button, Text } from './ContactListStyled';
 // import PropTypes from 'prop-types';
 
-export const ContactList = ({ items }) => {
-  const dispatch = useDispatch();
-
+export const ContactList = ({ items, onDelete }) => {
   const itemList = items.map(({ id, name, phone }) => {
     return (
       <Item key={id}>
-        {name}: {phone}
-        <Button type="button" onClick={() => dispatch(removeContact(id))}>
-          Delete
-        </Button>
+        <Text>{name}:</Text> <Text>{phone}</Text>
+        <Button onClick={() => onDelete(id)}>Delete</Button>
       </Item>
     );
   });
@@ -29,4 +22,5 @@ export const ContactList = ({ items }) => {
 //       number: PropTypes.string.isRequired,
 //     })
 //   ),
+//   onDelete: PropTypes.func.isRequired,
 // };
