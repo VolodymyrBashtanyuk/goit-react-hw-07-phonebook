@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
-import { Filter } from '../../components/FilterContact/FilterContact';
-import { ContactList } from '../../components/ContactList/ContactList';
-import { SubTitle } from '../../components/AppStyle';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContact, getFilter } from '../../redux/selector';
-import { filterContacts } from '../../redux/filterSlice';
+import { useEffect } from 'react';
+import { Filter } from 'components/FilterContact/FilterContact';
+import { ContactList } from 'components/ContactList/ContactList';
+import { SubTitle, ErrorMessage } from 'components/AppStyle';
+import { getContact, getFilter, getState } from 'redux/selector';
+import { filterContacts } from 'redux/filterSlice';
 import { fetchContacts, removeContact } from 'redux/Contacts/contactsOperation';
+import RingLoader from 'react-spinners/RingLoader';
 
 export const ContactsPage = () => {
-  const dispatch = useDispatch();
   const contacts = useSelector(getContact);
+  const { isLoading, error } = useSelector(getState);
   const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -39,11 +41,17 @@ export const ContactsPage = () => {
 
   return (
     <>
-      {contacts.length !== 0 && (
+      <SubTitle>Contacts</SubTitle>
+      <Filter onChange={filterChange} value={filter} />
+      {error ? (
+        <ErrorMessage>Please try again later {error} :(</ErrorMessage>
+      ) : (
         <>
-          <SubTitle>Contacts</SubTitle>
-          <Filter onChange={filterChange} value={filter} />
-          <ContactList items={getFilters()} onDelete={onDelete} />
+          {isLoading ? (
+            <RingLoader />
+          ) : (
+            <ContactList items={getFilters()} onDelete={onDelete} />
+          )}
         </>
       )}
     </>

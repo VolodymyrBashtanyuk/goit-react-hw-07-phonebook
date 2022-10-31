@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const List = styled.ul`
   display: flex;
   flex-direction: column;
-  padding: 0 40px;
+  padding: 20px 40px;
 `;
 
 export const Item = styled.li`
@@ -19,8 +19,7 @@ export const Item = styled.li`
   }
 `;
 export const Text = styled.p`
-  width: 400px;
-  /* margin-right: 80px; */
+  width: 30%;
   border-right: 1px solid #34b8e9;
 `;
 

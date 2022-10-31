@@ -4,7 +4,7 @@ export const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   font-weight: bold;
-  width: 300px;
+  width: 350px;
   margin-right: auto;
   margin-left: auto;
 `;

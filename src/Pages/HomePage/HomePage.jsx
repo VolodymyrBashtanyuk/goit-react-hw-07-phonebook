@@ -3,13 +3,13 @@ import { Title } from '../../components/AppStyle';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContact } from '../../redux/selector';
 import { addContact } from '../../redux/Contacts/contactsOperation';
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { dublicate } from 'components/Notifigation/Notification';
+import { ToastContainer } from 'react-toastify';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContact);
+  // const message = useSelector(getState);
 
   const isDublicate = ({ name }) => {
     const result = contacts.find(item => item.name === name);
@@ -18,18 +18,10 @@ export const HomePage = () => {
 
   const onAddContacts = data => {
     if (isDublicate(data)) {
-      const notify = () =>
-        toast.warn(`${data.name} is already in contacts `, {
-          theme: 'light',
-        });
-      return notify();
+      dublicate(data);
+      return;
     }
     dispatch(addContact(data));
-    const notifys = () =>
-      toast.success('You added contact in Phone book', {
-        theme: 'light',
-      });
-    return notifys();
   };
 
   return (
