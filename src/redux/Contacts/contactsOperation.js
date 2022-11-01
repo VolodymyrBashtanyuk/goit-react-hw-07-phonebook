@@ -1,6 +1,6 @@
 import * as api from '../../ContactsApi/contactsApi'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { success, errorMassege } from 'components/Notifigation/Notification';
+import { success, errorMassege, removeMessage} from 'components/Notifigation/Notification';
 
 
 export const fetchContacts = createAsyncThunk('contacts/fetch',
@@ -28,8 +28,10 @@ export const fetchContacts = createAsyncThunk('contacts/fetch',
        async (id, thunkApi) => {
     try {
       const result = await api.removeContacts(id);
+      removeMessage(result.name);
       return result;
     } catch (error) {
+      errorMassege();
       return thunkApi.rejectWithValue(error.message);
     }
   });

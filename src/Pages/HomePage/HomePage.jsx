@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify';
 export const HomePage = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContact);
-  // const message = useSelector(getState);
 
   const isDublicate = ({ name }) => {
     const result = contacts.find(item => item.name === name);

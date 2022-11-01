@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, CSSProperties } from 'react';
 import { Filter } from 'components/FilterContact/FilterContact';
 import { ContactList } from 'components/ContactList/ContactList';
 import { SubTitle, ErrorMessage } from 'components/AppStyle';
@@ -7,12 +7,18 @@ import { getContact, getFilter, getState } from 'redux/selector';
 import { filterContacts } from 'redux/filterSlice';
 import { fetchContacts, removeContact } from 'redux/Contacts/contactsOperation';
 import RingLoader from 'react-spinners/RingLoader';
+import { ToastContainer } from 'react-toastify';
 
 export const ContactsPage = () => {
   const contacts = useSelector(getContact);
   const { isLoading, error } = useSelector(getState);
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
+
+  CSSProperties = {
+    display: 'block',
+    margin: '50px auto',
+  };
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -48,10 +54,17 @@ export const ContactsPage = () => {
       ) : (
         <>
           {isLoading ? (
-            <RingLoader />
+            <RingLoader
+              color={'#573ee7'}
+              cssOverride={CSSProperties}
+              size={150}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           ) : (
             <ContactList items={getFilters()} onDelete={onDelete} />
           )}
+          <ToastContainer />
         </>
       )}
     </>

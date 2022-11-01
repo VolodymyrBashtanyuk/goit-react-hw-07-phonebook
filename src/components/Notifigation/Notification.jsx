@@ -15,3 +15,8 @@ export const dublicate = data =>
   toast.warn(`${data.name} is already in contacts `, {
     theme: 'light',
   });
+
+export const removeMessage = name =>
+  toast.info(`You are successful delete ${name} from Phone Book`, {
+    theme: 'colored',
+  });

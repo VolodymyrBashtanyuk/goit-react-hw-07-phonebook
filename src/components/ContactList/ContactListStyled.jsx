@@ -19,7 +19,7 @@ export const Item = styled.li`
   }
 `;
 export const Text = styled.p`
-  width: 30%;
+  width: 35%;
   border-right: 1px solid #34b8e9;
 `;
 
