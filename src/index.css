@@ -49,3 +49,9 @@ a {
 .active {
   color: #92ff01;;
 }
+.loading {
+  justify-content: center;
+  margin-top: 40px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 24px);
+}
