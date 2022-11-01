@@ -9,9 +9,10 @@ import { fetchContacts, removeContact } from 'redux/Contacts/contactsOperation';
 import RingLoader from 'react-spinners/RingLoader';
 import { ToastContainer } from 'react-toastify';
 
-CSSProperties = {
+const override: CSSProperties = {
   display: 'block',
-  margin: '50px auto',
+  margin: '0 auto',
+  borderColor: 'red',
 };
 
 export const ContactsPage = () => {
@@ -56,10 +57,8 @@ export const ContactsPage = () => {
           {isLoading ? (
             <RingLoader
               color={'#573ee7'}
-              cssOverride={CSSProperties}
+              cssOverride={override}
               size={150}
-              display={'block'}
-              margin={'50px auto'}
               aria-label="Loading Spinner"
               data-testid="loader"
             />
