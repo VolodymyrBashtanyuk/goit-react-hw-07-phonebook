@@ -9,16 +9,16 @@ import { fetchContacts, removeContact } from 'redux/Contacts/contactsOperation';
 import RingLoader from 'react-spinners/RingLoader';
 import { ToastContainer } from 'react-toastify';
 
+CSSProperties = {
+  display: 'block',
+  margin: '50px auto',
+};
+
 export const ContactsPage = () => {
   const contacts = useSelector(getContact);
   const { isLoading, error } = useSelector(getState);
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
-
-  CSSProperties = {
-    display: 'block',
-    margin: '50px auto',
-  };
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -58,6 +58,8 @@ export const ContactsPage = () => {
               color={'#573ee7'}
               cssOverride={CSSProperties}
               size={150}
+              display={'block'}
+              margin={'50px auto'}
               aria-label="Loading Spinner"
               data-testid="loader"
             />
